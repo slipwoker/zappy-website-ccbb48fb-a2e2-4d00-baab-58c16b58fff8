@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://-ccbb48fb.zappy5.app/sitemap.xml

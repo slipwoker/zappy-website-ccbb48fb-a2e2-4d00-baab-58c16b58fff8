@@ -1,0 +1,67 @@
+# בארי רכבים — Generative Engine Optimization Map
+
+> A רכב ורכבים business.
+
+---
+
+## Pages
+
+### Home
+https://-ccbb48fb.zappy5.app
+
+### About
+https://-ccbb48fb.zappy5.app/about
+
+### Process
+https://-ccbb48fb.zappy5.app/process
+
+### Contact
+https://-ccbb48fb.zappy5.app/contact
+
+### Products
+https://-ccbb48fb.zappy5.app/products
+המוצרים שלנו - בארי רכבים
+
+### Product Detail
+https://-ccbb48fb.zappy5.app/product/:slug
+פרטי המוצר - בארי רכבים
+
+### Category
+https://-ccbb48fb.zappy5.app/category/:slug
+מוצרים - בארי רכבים
+
+## Legal & Policy
+
+### Privacy Policy
+https://-ccbb48fb.zappy5.app/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://-ccbb48fb.zappy5.app/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://-ccbb48fb.zappy5.app/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About בארי רכבים
+בארי רכבים is a business in the רכב ורכבים industry.
+
+## Target Audience
+- רוכשי רכבי יוקרה
+- בעלי רכב ראשוני
+- אנשי מקצוע עירוניים
+
+## Industry
+רכב ורכבים
+
+---
+
+# Additional Resources
+
+- **Sitemap**: https://-ccbb48fb.zappy5.app/sitemap.xml
+- **Robots.txt**: https://-ccbb48fb.zappy5.app/robots.txt

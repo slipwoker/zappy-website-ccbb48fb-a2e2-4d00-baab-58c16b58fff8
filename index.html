@@ -1,0 +1,686 @@
+<!DOCTYPE html><html lang="he" dir="rtl" data-zappy-site-type="ecommerce"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>בארי רכבים | סוכנות רכבים</title>
+  <meta name="description" content="Home - בארי רכבים provides professional רכב ורכבים services. Specializing in סוכנות רכבים.">
+  <meta name="keywords" content="סוכנות רכבים, סוכנות רכבי יוקרה ישראל, קניית רכב ראשון בארי, רכבים יוקרתיים למכירה">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="בארי רכבים | סוכנות רכבים">
+  <meta property="og:description" content="Home - בארי רכבים provides professional רכב ורכבים services. Specializing in סוכנות רכבים.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="בארי רכבים | סוכנות רכבים">
+  <meta name="twitter:description" content="Home - בארי רכבים provides professional רכב ורכבים services. Specializing in סוכנות רכבים.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'ccbb48fb-a2e2-4d00-baab-58c16b58fff8',
+    apiUrl: 'https://qaapi.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <div class="search-wrapper">
+        <input type="text" id="mobile-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+        <button class="search-submit" id="mobile-search-submit" title="חיפוש">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <button class="close-search" id="close-mobile-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="search-results" id="mobile-search-results"></div>
+    </div>
+  
+<script>window.ZAPPY_WEBSITE_ID = "ccbb48fb-a2e2-4d00-baab-58c16b58fff8";window.ZAPPY_API_BASE = (window.location.pathname.includes('/preview') ? "http://localhost:5001" : "https://qaapi.zappy5.com");</script>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="בארי רכבים" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu">
+
+    <li class="menu-item-has-children zappy-products-dropdown">
+      <a href="/products">
+        מוצרים
+        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+      <ul class="sub-menu" id="zappy-nav-category-links">
+        <li><a href="/products">כל המוצרים</a></li>
+        <!-- Categories will be loaded dynamically -->
+      </ul>
+    </li>
+  <li><a href="/about">אודות</a></li><li><a href="/process">תהליך</a></li><li><a href="/contact">צור קשר</a></li></ul><div class="nav-ecommerce-icons nav-icons-left"><div class="nav-search-box">
+    <input type="text" class="nav-search-input" id="nav-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+    <button class="nav-search-btn" id="nav-search-btn" title="חיפוש">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <div class="nav-search-results" id="nav-search-results"></div>
+  </div></div><div class="nav-ecommerce-icons nav-icons-right"><button class="nav-search-toggle" id="mobile-search-toggle" title="חיפוש"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button></div>
+    
+    
+  </div>
+</nav>
+
+    <nav class="zappy-catalog-menu rtl" id="zappy-catalog-menu" dir="rtl">
+      <div class="catalog-menu-container">
+        <a href="/products" class="catalog-menu-item catalog-menu-all">כל המוצרים</a>
+        <div class="catalog-menu-categories" id="zappy-category-links">
+          <!-- Categories will be loaded dynamically -->
+        </div>
+      </div>
+    </nav>
+  
+  
+  <main>
+    <section class="home-hero-section" data-layout-spec="Home-Hero" dir="rtl" data-hero-type="fullscreen-scrim">
+  <div class="home-hero-background" data-preserve-bg="0">
+    <img data-placeholder="home-hero-bg" data-context="רכב משפחתי מודרני בצבע כהה חונה בסביבה נקייה ורגועה, תאורה טבעית חמה, רקע מטושטש של שמיים ונוף פתוח, תחושה של אמינות ושלווה - צילום איכותי לעסק ייעוץ רכב" width="1920" height="1080" src="/assets/site-home-hero-bg.webp" alt="רכב איכותי בסביבה רגועה המסמל את השירות המקצועי של בארי רכבים" class="home-hero-bg-image">
+  </div>
+  <div class="home-hero-scrim"></div>
+  <div class="home-hero-content-wrapper">
+    <div class="home-hero-overlay-card">
+      <h1 class="home-hero-title">בחירת רכב נכונה מתחילה בליווי אמיתי</h1>
+      <p class="home-hero-description">אנחנו מאמינים שתהליך בחירת רכב צריך להיות שקוף, ברור ונעים. ללא לחצים, עם כל המידע שצריך ובקצב שלכם. אנחנו כאן כדי להבטיח שתקבלו את ההחלטה הנכונה ביותר עבורכם.</p>
+      <h3 class="home-hero-reassurance">בדיקות עצמאיות • הסברים ברורים • ללא לחץ</h3>
+      <div class="home-hero-cta-group">
+        <a href="/contact" class="home-hero-btn-primary">שיחה עם יועץ</a>
+        <a href="/process" class="home-hero-btn-secondary">התהליך ב-3 שלבים</a>
+      </div>
+    </div>
+  </div>
+  <div class="home-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="sandTexture" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="5" cy="5" r="0.8" fill="rgba(76,58,44,0.04)"></circle>
+          <circle cx="15" cy="12" r="0.6" fill="rgba(76,58,44,0.03)"></circle>
+          <circle cx="28" cy="8" r="0.7" fill="rgba(76,58,44,0.04)"></circle>
+          <circle cx="35" cy="20" r="0.5" fill="rgba(76,58,44,0.03)"></circle>
+          <circle cx="10" cy="25" r="0.6" fill="rgba(76,58,44,0.04)"></circle>
+          <circle cx="22" cy="32" r="0.8" fill="rgba(76,58,44,0.03)"></circle>
+        </pattern>
+      </defs>
+      <path d="M0,120 L0,40 Q100,35 200,42 T400,38 Q500,42 600,35 T800,40 Q900,38 1000,42 T1200,35 L1200,120 Z" fill="var(--bg-light)"></path>
+      <path d="M0,120 L0,40 Q100,35 200,42 T400,38 Q500,42 600,35 T800,40 Q900,38 1000,42 T1200,35 L1200,120 Z" fill="url(#sandTexture)"></path>
+    </svg>
+  </div>
+</section>
+
+    <section class="featured-products-section" id="featured-products" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">מוצרים מומלצים</h2>
+        <div class="product-grid featured-grid" id="zappy-featured-products">
+          <div class="loading-products">טוען מוצרים...</div>
+        </div>
+        <div class="view-all-products">
+          <a href="/products" class="btn btn-primary">צפה בכל המוצרים →</a>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="featured-categories-section" id="featured-categories" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">קנו לפי קטגוריה</h2>
+        <div class="category-blocks" id="zappy-featured-categories">
+          <div class="loading-categories">טוען מוצרים...</div>
+        </div>
+      </div>
+    </section>
+  
+
+<section class="home-process-section" data-layout-spec="Home-process">
+  <div class="home-process-container">
+    <div class="home-process-header">
+      <h2>תהליך פשוט בשלושה שלבים לנסיעת מבחן מושלמת</h2>
+      <p class="home-process-intro">אנחנו מאמינים שקניית רכב צריכה להיות חוויה נעימה ושקופה. התהליך שלנו מעוצב כדי להפחית מתח ולהעניק לך את כל המידע שאתה צריך כדי לקבל החלטה בטוחה.</p>
+    </div>
+
+    <div class="home-process-steps-wrapper">
+      <div class="home-process-backplate" aria-hidden="true"></div>
+      
+      <div class="home-process-steps">
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 8V32L44 44" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              <circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="3"></circle>
+              <path d="M32 14V18M32 46V50M50 32H46M18 32H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <h3>שיתוף צרכים ותקציב</h3>
+          <p>נתחיל בשיחה קצרה ונעימה שבה תספר לנו על הציפיות שלך, סגנון הנהיגה והתקציב. נכין עבורך תוכנית ברורה וממוקדת שמתאימה בדיוק למה שאתה מחפש, ללא לחץ מיותר.</p>
+        </div>
+
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 32L26 46L52 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              <circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="3"></circle>
+              <path d="M32 12V16M44 18L41 21M52 32H48M44 46L41 43M32 52V48M20 46L23 43M12 32H16M20 18L23 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <h3>בדיקה ואימות מקצועי</h3>
+          <p>נבצע בדיקה יסודית של הרכב שבחרת, כולל היסטוריה מלאה ומצב טכני. נסביר לך את כל הממצאים בשפה פשוטה וברורה, כך שתדע בדיוק במה מדובר ותוכל להחליט בביטחון.</p>
+        </div>
+
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 12C20.954 12 12 20.954 12 32C12 43.046 20.954 52 32 52C43.046 52 52 43.046 52 32C52 20.954 43.046 12 32 12Z" stroke="currentColor" stroke-width="3"></path>
+              <path d="M32 20V32L40 40" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M22 16L18 12M42 16L46 12M32 8V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <h3>החלטה בטוחה וליווי מלא</h3>
+          <p>לאחר שתקבל את כל המידע, נלווה אותך בכל שלב הבא - מהסכם הרכישה ועד למסירת הרכב. אנחנו כאן כדי לוודא שהחוויה שלך תהיה חלקה, נעימה ובלי הפתעות.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="home-process-closing">אנחנו מחויבים לשקיפות מלאה ולחוויה ללא לחץ. כל שלב בתהליך מעוצב כדי להעניק לך ביטחון ושקט נפשי בדרך לרכב החדש שלך.</p>
+  </div>
+
+  <div class="home-process-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="processLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#C75B39;stop-opacity:1"></stop>
+          <stop offset="50%" style="stop-color:#C75B39;stop-opacity:0.8"></stop>
+          <stop offset="100%" style="stop-color:#C75B39;stop-"></stop>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="15" x2="800" y2="15" stroke="url(#processLineGradient)" stroke-width="2"></line>
+      <path d="M0,60 L0,20 L800,20 L820,30 L840,25 L860,35 L880,28 L900,38 L920,32 L940,40 L960,35 L980,42 L1000,38 L1020,45 L1040,40 L1060,48 L1080,43 L1100,50 L1120,45 L1140,52 L1160,48 L1180,54 L1200,50 L1200,60 Z" fill="var(--bg-light)" opacity="0.95"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-showcase-section" data-layout-spec="Home-showcase">
+  <div class="home-showcase-container">
+    <div class="home-showcase-intro">
+      <h2>דוגמאות לרכבים שאנחנו עוזרים לאנשים להעריך</h2>
+      <p>אלו דוגמאות מייצגות מהרכבים שליווינו לקוחות בתהליך הערכה והחלטה. אין זה מלאי זמין, אלא המחשה לסוג הרכבים והליווי המקצועי שאנחנו מציעים.</p>
+    </div>
+    
+    <div class="home-showcase-grid">
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-1" data-context="Professional photo of a modern Toyota Corolla 2021 parked on a clean Israeli street in Tel Aviv, warm afternoon light, realistic urban setting with apartment buildings in background, side angle showing full car profile" width="600" height="400" src="/assets/site-home-showcase-image-1.webp" alt="טויוטה קורולה 2021">
+          <span class="home-showcase-tag">זמין לבדיקה</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>טויוטה קורולה 2021</h3>
+          <p>רכב במצב מצוין עם קילומטראז' נמוך, מתאים למשפחות ולשימוש יומיומי, תיעוד מלא ושקיפות מוחלטת בהיסטוריית הרכב.</p>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-2" data-context="Professional photo of a sleek Mazda CX-5 2020 SUV parked in a modern Israeli parking lot in Herzliya, golden hour lighting, clean composition showing front three-quarter view" width="600" height="400" src="/assets/site-home-showcase-image-2.webp" alt="מאזדה CX-5 2020">
+          <span class="home-showcase-tag">נבדק לאחרונה</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>מאזדה CX-5 2020</h3>
+          <p>רכב פנאי מרווח ונוח, מערכות בטיחות מתקדמות, מושלם לנסיעות ארוכות ולמשפחות, כולל דוח מפורט על מצב הרכב.</p>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-3" data-context="Professional photo of a compact Hyundai i20 2022 parked on a quiet residential street in Jerusalem, soft natural lighting, showing driver side angle with clear visibility of condition" width="600" height="400" src="/assets/site-home-showcase-image-3.webp" alt="יונדאי i20 2022">
+          <span class="home-showcase-tag">מומלץ למתחילים</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>יונדאי i20 2022</h3>
+          <p>רכב חסכוני ומעשי לנהגים חדשים, צריכת דלק נמוכה וקל לתפעול, ליווי מלא בתהליך הבחירה והערכה.</p>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-4" data-context="Professional photo of a premium Volkswagen Tiguan 2021 parked near a modern office building in Ramat Gan, clean urban setting, front three-quarter view showing premium details" width="600" height="400" src="/assets/site-home-showcase-image-4.webp" alt="פולקסווגן טיגואן 2021">
+          <span class="home-showcase-tag">יוקרתי</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>פולקסווגן טיגואן 2021</h3>
+          <p>רכב יוקרתי עם גימור איכותי, נהיגה חלקה ונוחה, מתאים למי שמחפש שילוב של סטייל ואמינות עם תיעוד מפורט.</p>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-5" data-context="Professional photo of a sporty Kia Sportage 2020 parked in a scenic spot near Haifa bay, natural daylight, dynamic angle showing athletic design and modern styling" width="600" height="400" src="/assets/site-home-showcase-image-5.webp" alt="קיה ספורטאז' 2020">
+          <span class="home-showcase-tag">ספורטיבי</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>קיה ספורטאז' 2020</h3>
+          <p>עיצוב ספורטיבי ודינמי, ביצועים מעולים ונהיגה מהנה, מתאים למי שמחפש חוויית נהיגה מרגשת עם אמינות מוכחת.</p>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-6" data-context="Professional photo of a reliable Honda Civic 2019 parked in a clean parking area in Netanya, bright daylight, side profile showing excellent condition and modern design" width="600" height="400" src="/assets/site-home-showcase-image-6.webp" alt="הונדה סיוויק 2019">
+          <span class="home-showcase-tag">אמין ומוכח</span>
+        </div>
+        <div class="home-showcase-card-content">
+          <h3>הונדה סיוויק 2019</h3>
+          <p>רכב אמין עם מוניטין מעולה, עלויות תחזוקה נמוכות ואיכות בנייה גבוהה, ליווי צמוד בבדיקות ובהחלטה הסופית.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="home-showcase-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,45 Q20,42 40,48 T80,43 Q100,47 120,41 T160,46 Q180,42 200,49 T240,44 Q260,48 280,42 T320,47 Q340,43 360,49 T400,45 Q420,49 440,43 T480,48 Q500,44 520,50 T560,45 Q580,49 600,43 T640,48 Q660,44 680,50 T720,45 Q740,49 760,43 T800,48 Q820,44 840,50 T880,45 Q900,49 920,43 T960,48 Q980,44 1000,50 T1040,45 Q1060,49 1080,43 T1120,48 Q1140,44 1160,50 T1200,45 L1200,80 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-reviews-section" data-layout-spec="Home-reviews">
+  <div class="home-reviews-container">
+    <div class="home-reviews-header">
+      <h2>אנשים מרגישים רגועים יותר אחרי השיחה הראשונה</h2>
+      <p>אנחנו כאן כדי להפוך את התהליך לברור, פשוט ונעים. כל שאלה מקבלת תשובה, כל דאגה מקבלת מענה אמיתי.</p>
+    </div>
+    
+    <div class="home-reviews-grid">
+      <article class="home-review-card">
+        <h3>"סוף סוף מישהו שמסביר בשקט"</h3>
+        <p>הגעתי עם המון שאלות וחששות. בארי רכבים נתנו לי את הזמן להבין כל פרט, בלי לחץ ובלי מכירה אגרסיבית. הרגשתי שמישהו באמת דואג שאני אעשה את הבחירה הנכונה בשבילי.</p>
+        <p class="home-review-context">קונה רכב ראשון</p>
+      </article>
+      
+      <article class="home-review-card">
+        <h3>"תהליך שקוף מתחילה ועד סוף"</h3>
+        <p>חיפשתי רכב למשפחה וחשוב לי היה לדעת בדיוק מה אני מקבל. הצוות היה זמין לכל שאלה, הסבירו כל עלות וכל שלב. אין הפתעות, רק שירות אמיתי ואכפתי.</p>
+        <p class="home-review-context">שדרוג משפחתי</p>
+      </article>
+      
+      <article class="home-review-card">
+        <h3>"הרגשתי שאני בידיים טובות"</h3>
+        <p>אחרי כמה חוויות לא נעימות במקומות אחרים, הגעתי לבארי עם ציפיות נמוכות. התפתעתי לטובה - יחס אישי, ייעוץ מקצועי, ותחושה שהם רוצים שאני אצא מרוצה. בדיוק מה שחיפשתי.</p>
+        <p class="home-review-context">מחפש רכב יוקרתי</p>
+      </article>
+    </div>
+  </div>
+  
+  <div class="home-reviews-transition-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="reviewsRadialGlow" cx="0%" cy="100%" r="80%">
+          <stop offset="0%" style="stop-color:#3A3229;stop-opacity:1"></stop>
+          <stop offset="50%" style="stop-color:#2A231E;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#17120F;stop-opacity:1"></stop>
+        </radialGradient>
+      </defs>
+      <path d="M0,120 L0,60 Q150,55 300,62 T600,58 Q750,62 900,55 T1200,60 L1200,120 Z" fill="url(#reviewsRadialGlow)"></path>
+      <path d="M0,60 Q150,55 300,62 T600,58 Q750,62 900,55 T1200,60" stroke="rgba(107,125,58,0.3)" stroke-width="1" fill="none"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-cta-section" data-layout-spec="Home-cta">
+  <div class="home-cta-container">
+    <div class="home-cta-panel">
+      <div class="home-cta-content">
+        <h2 class="home-cta-title">מוכנים לצעד הבא? פשוט וברור</h2>
+        <p class="home-cta-text">שלחו הודעה או התקשרו אלינו, ונסביר לכם בפשטות את כל האפשרויות. אנחנו כאן כדי ללוות אתכם בתהליך רכישת רכב נעים ושקוף, ללא לחצים.</p>
+        <div class="home-cta-buttons">
+          <a href="/contact" class="btn-primary home-cta-btn-primary">צרו קשר</a>
+          <a href="/about" class="btn-ghost home-cta-btn-secondary">הכירו את הצוות</a>
+        </div>
+      </div>
+      <div class="home-cta-image-wrapper">
+        <img data-placeholder="home-cta-image-1" data-context="Warm authentic photo of a professional car advisor shaking hands with a happy customer next to a pristine car during handover moment at a dealership, natural lighting, genuine smiles, representing trust and successful car purchase experience in Israel" width="600" height="400" src="/assets/site-home-cta-image-1.webp" alt="יועץ רכבים מוסר מפתחות ללקוח מרוצה ליד רכב חדש" class="home-cta-image">
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-grid"><div class="footer-section footer-about"><img src="/assets/business-logo.webp" alt="בארי רכבים" class="logo" /><p class="footer-description">בארי רכבים - המומחים שלכם לכל צורכי הרכב. שירות מקצועי, אמין ואיכותי.</p></div><div class="footer-section footer-links"><h3 class="footer-title">קישורים מהירים</h3><ul class="footer-nav"><li><a href="/about">אודות</a></li><li><a href="/process">תהליך העבודה</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-section footer-contact"><h3 class="footer-title">יצירת קשר</h3><ul class="contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-section footer-social"><h3 class="footer-title">עקבו אחרינו</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאים והגבלות</a><span class="separator">|</span>
+            <a href="/return-policy" aria-label="מדיניות החזרות">
+              מדיניות החזרות
+            </a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="footer-copyright"><p>© 2026 בארי רכבים. כל הזכויות שמורות.</p></div><div class="footer-attribution"><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
