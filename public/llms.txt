@@ -1,67 +1,61 @@
-# בארי רכבים — Generative Engine Optimization Map
-
-> A רכב ורכבים business.
+# Business — Generative Engine Optimization Map
 
 ---
 
 ## Pages
 
 ### Home
-https://-ccbb48fb.zappy5.app
+https://example.com
 
 ### About
-https://-ccbb48fb.zappy5.app/about
+https://example.com/about
 
 ### Process
-https://-ccbb48fb.zappy5.app/process
+https://example.com/process
 
 ### Contact
-https://-ccbb48fb.zappy5.app/contact
+https://example.com/contact
 
 ### Products
-https://-ccbb48fb.zappy5.app/products
+https://example.com/products
 המוצרים שלנו - בארי רכבים
 
 ### Product Detail
-https://-ccbb48fb.zappy5.app/product/:slug
+https://example.com/product/:slug
 פרטי המוצר - בארי רכבים
 
 ### Category
-https://-ccbb48fb.zappy5.app/category/:slug
+https://example.com/category/:slug
 מוצרים - בארי רכבים
+
+### Page
+https://example.com/sample-pdf-file-1770814905958
+
+### Page
+https://example.com/sample-pdf-file
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://-ccbb48fb.zappy5.app/privacy
+https://example.com/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://-ccbb48fb.zappy5.app/terms
+https://example.com/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://-ccbb48fb.zappy5.app/accessibility
+https://example.com/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About בארי רכבים
-בארי רכבים is a business in the רכב ורכבים industry.
-
-## Target Audience
-- רוכשי רכבי יוקרה
-- בעלי רכב ראשוני
-- אנשי מקצוע עירוניים
-
-## Industry
-רכב ורכבים
-
+## About Business
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://-ccbb48fb.zappy5.app/sitemap.xml
-- **Robots.txt**: https://-ccbb48fb.zappy5.app/robots.txt
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt
